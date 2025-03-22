@@ -126,7 +126,17 @@ async function addClicksPerSecond() {
 
 function clearsave() {
     alert("Save DATA reset.")
-    localStorage.clear()
+    localStorage.setItem("clicks", 0);
+    localStorage.setItem("cpc", 1);
+    localStorage.setItem("up2rq", 10);
+    localStorage.setItem("up1rq", 60);
+    localStorage.setItem("theme", "light");
+    localStorage.setItem("cps", 0)
+    clicks = 0
+    cpc = 1
+    cps = 0
+    up1button.cost = 10
+    up2button.cost = 60
 }
  //Async function delays for milliseconds
 function wait(milliseconds) {
