@@ -1,0 +1,60 @@
+body {
+    text-align: center;
+    font-family: Arial, sans-serif;
+  }
+  .clickable:active {
+    transform: scale(0.9);
+  }
+  .counter {
+    font-size: 24px;
+    margin-top: 10px;
+  }
+  .clickable {
+    width: 200px;
+    height: 200px;
+    object-fit: contain; 
+    cursor: pointer;
+    transition: transform 0.1s;
+  }
+  button {
+    background: #ddd;
+    display: inline-block;
+    color: #333; 
+    font-size: 18px;
+    padding: 12px 24px;
+    border: 2px solid #bbb;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  button:hover {
+    background: #ccc; 
+    border-color: #aaa;
+  }
+  
+  button:active {
+    background: #bbb;
+    border-color: #999;
+    transform: translateY(2px);
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  }
+  .b1 {
+    position: fixed; 
+  bottom: 0;       
+  left: 0;         
+  }
+  .b2 {
+    position: fixed;
+  bottom: 0;       
+  left: 120px;         
+  }
+  .b3 {
+    position: fixed; 
+  bottom: 0;       
+  left: 240px;         
+  }
+
+
+

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Clicker Game Template</title>
+        <link rel="stylesheet" href="style.css">
+    </head>
+    <body>
+        <h1 id="h">Click Penny!</h1>
+        <img src="img.png" alt="Clickable" class="clickable" id="clickImage">
+        <p class="counter">Clicks: <span id="clickCount">0</span></p>
+        <button class="upgrade" onclick="upgrade1()" id="up1b">Upgrade 1! Cost: 10</button>
+        <button class="upgrade" onclick="upgrade2()" id="up2b">Upgrade 2! Cost: 60</button>
+        <p id="notif"></p>
+        <button class="cd"onclick="clearsave()">clear data</button>
+        <button class="tt" onclick="toggletheme()">Toggle theme</button>    
+        <script src="script.js"></script>
+    </body>
+</html>
