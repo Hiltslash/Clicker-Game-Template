@@ -123,6 +123,11 @@ async function addClicksPerSecond() {
     }
     
 }
+
+function clearsave() {
+    alert("Save DATA reset.")
+    localStorage.clear()
+}
  //Async function delays for milliseconds
 function wait(milliseconds) {
     return new Promise(resolve => setTimeout(resolve, milliseconds));
