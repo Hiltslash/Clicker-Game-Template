@@ -53,20 +53,40 @@ class upgradeButton {
         }
     }
 }
-
+class achievement {
+    constructor(name, cpcr, cpsr, clickreq, description, reward, emoji, achieved) {
+        this.name=name
+        this.cpcr = cpcr
+        this.cpsr = cpsr
+        this.clickreq = clickreq
+        this.description = description
+        this.reward = reward
+        this.emoji = emoji
+        this.achieved = achieved
+    }
+    check() {
+        if (cpc >= this.cpcr && cps >= this.cpsr && clicks >= this.clickreq && !this.achieved) {
+            alert(this.emoji + " Achievement Unlocked: " + this.name + " Reward: " + this.reward)
+            this.achieved = true
+        }
+    }
+}
 
 
 //EDIT THIS:
 document.title = "Coding Clicker! (Hiltslash's Engine)"
 header.innerHTML = "Write some Code! (with the button)"
-
+const ach1 = new achievement("Click Marathon", 0, 0, 26400, "Get over 26400 clicks.", 6000, "👟")
+const ach2 = new achievement("Passive Income", 0, 600, 0, "Make 600 a second.", 6000, "💰")
+const ach3 = new achievement("Smash Clicker", 1200, 0, 0, "Get over 26400 clicks.", 6000, "👊")
 const up1button = new upgradeButton("Coffee", document.getElementById("up1b"), 4, 0, 10, 1.2, 10)
 const up2button = new upgradeButton("Clean-up Code", document.getElementById("up2b"), 6, 0, 60, 1.2, 60)
-const up3button = new upgradeButton("AI Code Writer", null, 3, 3, 600, 1.1)
+const up3button = new upgradeButton("AI Code Writer", null, 3, 3, 600, 1.1, 600)
 const up4button = new upgradeButton("Hack Computers", null, 100, 450, 3000, 1.001, 3000)
 up3button.create()  
 up4button.create()
 upgrades = [up1button, up2button, up3button, up4button]
+achievements = [ach1, ach2, ach3]
 //Create new upgrades with the upgradeButton class. (name, element, cpc, cps, multiplier)
 //For custom upgrades, run the <name>.create() function to initialize. up3button is an example.
 
@@ -83,7 +103,11 @@ function save() {
     localStorage.setItem("clicks", clicks);
     localStorage.setItem("cpc", cpc);
     localStorage.setItem("theme", theme);
-    localStorage.setItem("cps", cps)
+    localStorage.setItem("cps", cps);
+    
+    for (let ach of achievements) {
+        localStorage.setItem("achievement_" + ach.name, ach.achieved);
+    }
 }
 
 function load() {
@@ -91,32 +115,36 @@ function load() {
         clicks = parseInt(localStorage.getItem("clicks")) || 0;
         cpc = parseInt(localStorage.getItem("cpc")) || 1;
         cps = parseInt(localStorage.getItem("cps")) || 0;
+
         for (let button of upgrades) {
             let storedCost = localStorage.getItem(button.name + "cost");
             button.cost = storedCost ? parseInt(storedCost) : button.cost;
         }
         
-        
-        theme = localStorage.getItem("theme") || "light";
-        // Update UI with loaded values
-        clickCount.textContent = clicks;
+        for (let ach of achievements) {
+            ach.achieved = localStorage.getItem("achievement_" + ach.name) === "true";
+        }
 
-        statshow.innerHTML = "CPC: " + cpc + " CPS: " +cps
+        theme = localStorage.getItem("theme") || "light";
+        clickCount.textContent = clicks;
+        statshow.innerHTML = "CPC: " + cpc + " CPS: " + cps;
         
-        // Apply the saved theme
         if (theme === "dark") {
             document.body.style.backgroundColor = "#191919";
             document.body.style.color = "white";
         }
-        
     }
 }
+
 
 //Button click event listner
 clickImage.addEventListener("click", () => {
     clicks += cpc;
     clickCount.textContent = clicks;
     statshow.innerHTML = "CPC: " + cpc + " CPS: " +cps
+    for (let ach of achievements) {
+        ach.check()
+    }
     save();
 });
 
@@ -125,28 +153,51 @@ async function addClicksPerSecond() {
         await wait(1000) 
         clicks += cps
         clickCount.textContent = clicks;
-        statshow.innerHTML = "CPC: " + cpc + " CPS: " +cps
+        statshow.innerHTML = "CPC: " + cpc + " CPS: " + cps
         save();
     }
     
 }
 
 function clearsave() {
-    alert("Save DATA reset.")
+    alert("Save DATA reset.");
+    
+    // Reset upgrades to their starting values
     for (let upgrade of upgrades) {
-        upgrade.cost = upgrade.start;  // Use the original starting cost
+        upgrade.cost = upgrade.start;
     }
     
-    localStorage.setItem("clicks", 0);
-    localStorage.setItem("cpc", 1);
-    localStorage.setItem("theme", "light");
-    localStorage.setItem("cps", 0)
-    clicks = 0
-    cpc = 1
-    cps = 0
-    up1button.cost = 10
-    up2button.cost = 60
+    // Reset achievements
+    for (let ach of achievements) {
+        ach.achieved = false;
+        localStorage.removeItem("achievement_" + ach.name);
+    }
+    
+    // Reset game values
+    clicks = 0;
+    cpc = 1;
+    cps = 0;
+    theme = "light";
+    
+    // Reset localStorage
+    localStorage.setItem("clicks", clicks);
+    localStorage.setItem("cpc", cpc);
+    localStorage.setItem("theme", theme);
+    localStorage.setItem("cps", cps);
+    
+    for (let button of upgrades) {
+        localStorage.setItem(button.name + "cost", button.start);
+    }
+    
+    // Update UI
+    clickCount.textContent = clicks;
+    statshow.innerHTML = "CPC: " + cpc + " CPS: " + cps;
+    
+    // Reset theme to light mode
+    document.body.style.backgroundColor = "white";
+    document.body.style.color = "black";
 }
+
  //Async function delays for milliseconds
 function wait(milliseconds) {
     return new Promise(resolve => setTimeout(resolve, milliseconds));
