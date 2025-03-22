@@ -5,13 +5,14 @@ const image = document.getElementById("clickImage")
 const statshow = document.getElementById("stats")
 
 class upgradeButton {
-    constructor(name, element, cpc, cps, cost, multiplier) {
+    constructor(name, element, cpc, cps, cost, multiplier, start) {
         this.name = name
         this.element = element
         this.cpc = cpc
         this.cps = cps
         this.cost = cost
         this.multiplier = multiplier
+        this.start = start
     }
     async clicked() {
         if (clicks >= this.cost) {
@@ -56,13 +57,16 @@ class upgradeButton {
 
 
 //EDIT THIS:
-document.title = "GAME TITLE"
-header.innerHTML = "Click the button!"
-const up1button = new upgradeButton("Upgrade 1", document.getElementById("up1b"), 4, 0, 10, 1.2)
-const up2button = new upgradeButton("Upgrade 2", document.getElementById("up2b"), 6, 0, 60, 1.2)
-const up3button = new upgradeButton("Upgrade 3", null, 3, 3, 600, 1.1)
-up3button.create()
+document.title = "Coding Clicker! (Hiltslash's Engine)"
+header.innerHTML = "Write some Code! (with the button)"
 
+const up1button = new upgradeButton("Coffee", document.getElementById("up1b"), 4, 0, 10, 1.2, 10)
+const up2button = new upgradeButton("Clean-up Code", document.getElementById("up2b"), 6, 0, 60, 1.2, 60)
+const up3button = new upgradeButton("AI Code Writer", null, 3, 3, 600, 1.1)
+const up4button = new upgradeButton("Hack Computers", null, 100, 450, 3000, 1.001, 3000)
+up3button.create()  
+up4button.create()
+upgrades = [up1button, up2button, up3button, up4button]
 //Create new upgrades with the upgradeButton class. (name, element, cpc, cps, multiplier)
 //For custom upgrades, run the <name>.create() function to initialize. up3button is an example.
 
@@ -70,15 +74,14 @@ up3button.create()
 var clicks = 0;
 var cpc = 1;
 var cps = 0;
-var up2rq = 60;
-var up1rq = 10;
 var theme = "light";
 
 function save() {
+    for (let button of upgrades) {
+        localStorage.setItem(button.name + "cost", button.cost);
+    }
     localStorage.setItem("clicks", clicks);
     localStorage.setItem("cpc", cpc);
-    localStorage.setItem("up2rq", up2rq);
-    localStorage.setItem("up1rq", up1rq);
     localStorage.setItem("theme", theme);
     localStorage.setItem("cps", cps)
 }
@@ -88,8 +91,12 @@ function load() {
         clicks = parseInt(localStorage.getItem("clicks")) || 0;
         cpc = parseInt(localStorage.getItem("cpc")) || 1;
         cps = parseInt(localStorage.getItem("cps")) || 0;
-        up2button.cost = parseInt(localStorage.getItem("up2rq")) || 60;
-        up1button.cost = parseInt(localStorage.getItem("up1rq")) || 10;
+        for (let button of upgrades) {
+            let storedCost = localStorage.getItem(button.name + "cost");
+            button.cost = storedCost ? parseInt(storedCost) : button.cost;
+        }
+        
+        
         theme = localStorage.getItem("theme") || "light";
         // Update UI with loaded values
         clickCount.textContent = clicks;
@@ -126,10 +133,12 @@ async function addClicksPerSecond() {
 
 function clearsave() {
     alert("Save DATA reset.")
+    for (let upgrade of upgrades) {
+        upgrade.cost = upgrade.start;  // Use the original starting cost
+    }
+    
     localStorage.setItem("clicks", 0);
     localStorage.setItem("cpc", 1);
-    localStorage.setItem("up2rq", 10);
-    localStorage.setItem("up1rq", 60);
     localStorage.setItem("theme", "light");
     localStorage.setItem("cps", 0)
     clicks = 0
@@ -159,8 +168,6 @@ function toggletheme() {
             break;
     }
 }
-
-
 
 // Initialize game
 load();
