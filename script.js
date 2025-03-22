@@ -62,6 +62,7 @@ const up1button = new upgradeButton("Upgrade 1", document.getElementById("up1b")
 const up2button = new upgradeButton("Upgrade 2", document.getElementById("up2b"), 6, 0, 60, 1.2)
 const up3button = new upgradeButton("Upgrade 3", null, 3, 3, 600, 1.1)
 up3button.create()
+
 //Create new upgrades with the upgradeButton class. (name, element, cpc, cps, multiplier)
 //For custom upgrades, run the <name>.create() function to initialize. up3button is an example.
 
