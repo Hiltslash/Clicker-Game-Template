@@ -27,9 +27,9 @@ function load() {
         up1rq = parseInt(localStorage.getItem("up1rq")) || 10;
         theme = localStorage.getItem("theme") || "light";
         // Update UI with loaded values
-        clickCount.textContent = count;
-        tbutton.innerHTML = "Upgrade 1: Cost:  " + up1rq;
-        toyb.innerHTML = "Upgrade 2: Cost:  " + up2rq;
+        clickCount.textContent = clicks;
+        up1button.innerHTML = "Upgrade 1: Cost:  " + up1rq;
+        up2button.innerHTML = "Upgrade 2: Cost:  " + up2rq;
         
         // Apply the saved theme
         if (theme === "dark") {
@@ -42,8 +42,8 @@ function load() {
 
 //Button click event listner
 clickImage.addEventListener("click", () => {
-    count += cpc;
-    clickCount.textContent = count;
+    clicks += cpc;
+    clickCount.textContent = clicks;
     save();
 });
 
@@ -56,15 +56,14 @@ function wait(milliseconds) {
 
 //Treat button function
 async function upgrade1() {
-    if (count >= up1rq) {
-        treatimg()
+    if (clicks >= up1rq) {
         cpc += 2;
         p.innerHTML = "+2 CPC";
-        count -= up1rq;
+        clicks -= up1rq;
         up1rq = Math.ceil(up1rq * 1.2);
-        clickCount.textContent = count;
+        clickCount.textContent = clicks;
         let message = "Upgrade 1: Cost:  " + up1rq;
-        tbutton.innerHTML = message;
+        up1button.innerHTML = message;
         save();
         await wait(2000);
         p.innerHTML = "";
@@ -78,15 +77,14 @@ async function upgrade1() {
 
 //toy button function
 async function upgrade2() {
-    if (count >= up2rq) {
-        toyimg()
+    if (clicks >= up2rq) {
         cpc += 6;
         p.innerHTML = "+6 CPC";
-        count -= up2rq;
+        clicks -= up2rq;
         up2rq = Math.ceil(up2rq * 1.2);
-        clickCount.textContent = count;
+        clickclicks.textContent = clicks;
         let message = "Upgrade 2: Cost:  " + up2rq;
-        toyb.innerHTML = message;
+        up2button.innerHTML = message;
         save();
         await wait(2000);
         p.innerHTML = "";
@@ -105,7 +103,7 @@ function clearsave() {
     if (confirmReset) {
         localStorage.clear();
         // Reset to default values
-        count = 0;
+        clicks = 0;
         cpc = 1;
         up2rq = 60;
         up1rq = 10;
@@ -113,9 +111,9 @@ function clearsave() {
         currentcat = 1;
         
         // Update UI
-        clickCount.textContent = count;
-        tbutton.innerHTML = "Upgrade 1: Cost:  " + up1rq;
-        toyb.innerHTML = "Upgrade 2: Cost:  " + up2rq;
+        clickCount.textContent = clicks;
+        up1button.innerHTML = "Upgrade 1: Cost:  " + up1rq;
+        up2button.innerHTML = "Upgrade 2: Cost:  " + up2rq;
         document.body.style.backgroundColor = "white";
         document.body.style.color = "black";
         clickImage.src = "penny.png";
