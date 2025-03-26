@@ -15,6 +15,15 @@
         <button class="cd"onclick="clearsave()">clear data</button>
         <button class="tt" onclick="toggletheme()">Toggle theme</button>
         <p id="stats"></p>  
+        <audio id="bg-music" loop>
+            <source src="track.mp3" type="audio/mp3">
+          </audio>
+          
+          <script>
+            document.addEventListener("click", function () {
+              document.getElementById("bg-music").play();
+            }, { once: true });
+          </script>
         <script src="script.js"></script>
     </body>
 </html>
