@@ -3,6 +3,7 @@ const p = document.getElementById("notif")
 const header = document.getElementById("h")
 const image = document.getElementById("clickImage")
 const statshow = document.getElementById("stats")
+const achnoise = new Audio("ach.mp3")
 
 class upgradeButton {
     constructor(name, element, cpc, cps, cost, multiplier, start) {
@@ -68,6 +69,7 @@ class achievement {
         if (cpc >= this.cpcr && cps >= this.cpsr && clicks >= this.clickreq && !this.achieved) {
             alert(this.emoji + " Achievement Unlocked: " + this.name + " Reward: " + this.reward)
             this.achieved = true
+            achnoise.play()
         }
     }
 }
@@ -78,11 +80,11 @@ document.title = "Coding Clicker! (Hiltslash's Engine)"
 header.innerHTML = "Write some Code! (with the button)"
 const ach1 = new achievement("Click Marathon", 0, 0, 26400, "Get over 26400 clicks.", 6000, "👟")
 const ach2 = new achievement("Passive Income", 0, 600, 0, "Make 600 a second.", 6000, "💰")
-const ach3 = new achievement("Smash Clicker", 1200, 0, 0, "Get over 26400 clicks.", 6000, "👊")
+const ach3 = new achievement("Smash Clicker", 1200, 0, 0, "Make 1200 clicks per click", 6000, "👊")
 const up1button = new upgradeButton("Coffee", document.getElementById("up1b"), 4, 0, 10, 1.2, 10)
 const up2button = new upgradeButton("Clean-up Code", document.getElementById("up2b"), 6, 0, 60, 1.2, 60)
 const up3button = new upgradeButton("AI Code Writer", null, 3, 3, 600, 1.1, 600)
-const up4button = new upgradeButton("Hack Computers", null, 100, 450, 3000, 1.001, 3000)
+const up4button = new upgradeButton("Hack Computers", null, 100, 450, 3000, 1.1, 3000)
 up3button.create()  
 up4button.create()
 upgrades = [up1button, up2button, up3button, up4button]
