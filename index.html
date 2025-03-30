@@ -6,24 +6,30 @@
         <meta charset="utf-8">
     </head>
     <body>
-        <h1 id="h">Click Penny!</h1>
-        <img src="img.png" alt="Clickable" class="clickable" id="clickImage">
-        <p class="counter">Clicks: <span id="clickCount">0</span></p>
-        <button class="upgrade" onclick="up1button.clicked()" id="up1b">Upgrade 1! Cost: 10</button>
-        <button class="upgrade" onclick="up2button.clicked()" id="up2b">Upgrade 2! Cost: 60</button>
-        <p id="notif"></p>
-        <button class="cd"onclick="clearsave()">clear data</button>
-        <button class="tt" onclick="toggletheme()">Toggle theme</button>
-        <p id="stats"></p>  
-        <audio id="bg-music" loop>
-            <source src="track.mp3" type="audio/mp3">
-          </audio>
-          
-          <script>
+        <div class="sidebar">
+            <div class="sidebar-buttons">
+                <button class="cd" onclick="clearsave()">Clear Data</button>
+                <button class="tt" onclick="toggletheme()">Toggle Theme</button>
+            </div>
+        </div>
+        <div class="main-content">
+            <h1 id="h">Click Penny!</h1>
+            <img src="img.png" alt="Clickable" class="clickable" id="clickImage">
+            <p class="counter">Clicks: <span id="clickCount">0</span></p>
+            <button class="upgrade" onclick="up1button.clicked()" id="up1b">Upgrade 1! Cost: 10</button>
+            <button class="upgrade" onclick="up2button.clicked()" id="up2b">Upgrade 2! Cost: 60</button>
+            <p id="notif"></p>
+            <p id="stats"></p>  
+            <audio id="bg-music" loop>
+                <source src="track.mp3" type="audio/mp3">
+            </audio>
+            <img src="calculator crashes out.png" alt="Calculator Crashes Out" id="hehe">
+        </div>
+        <script>
             document.addEventListener("click", function () {
-              document.getElementById("bg-music").play();
+                document.getElementById("bg-music").play();
             }, { once: true });
-          </script>
+        </script>
         <script src="script.js"></script>
     </body>
 </html>

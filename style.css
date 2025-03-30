@@ -1,22 +1,54 @@
 body {
     text-align: center;
     font-family: Arial, sans-serif;
-  }
-  .clickable:active {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    min-height: 100vh;
+    background-color: white;
+    color: black;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.sidebar {
+    width: 200px;
+    background-color: #f0f0f0;
+    padding: 20px;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.sidebar-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.main-content {
+    flex: 1;
+    padding: 20px;
+}
+
+.clickable:active {
     transform: scale(0.9);
-  }
-  .counter {
+}
+
+.counter {
     font-size: 24px;
     margin-top: 10px;
-  }
-  .clickable {
+}
+
+.clickable {
     width: 200px;
     height: 200px;
     object-fit: contain; 
     cursor: pointer;
     transition: transform 0.1s;
-  }
-  button {
+}
+
+button {
     background: #ddd;
     display: inline-block;
     color: #333; 
@@ -27,34 +59,101 @@ body {
     cursor: pointer;
     transition: all 0.2s ease;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  }
-  
-  button:hover {
+    width: 100%;
+}
+
+button:hover {
     background: #ccc; 
     border-color: #aaa;
-  }
-  
-  button:active {
+}
+
+button:active {
     background: #bbb;
     border-color: #999;
     transform: translateY(2px);
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
-  }
-  .b1 {
+}
+
+.prestige-button {
+    background: #ffd700;
+    border-color: #ffa500;
+    color: #000;
+    font-weight: bold;
+    display: none;
+}
+
+.prestige-button.available {
+    display: block;
+}
+
+.prestige-button.completed {
+    display: none !important;
+    visibility: hidden !important;
+    opacity: 0 !important;
+    pointer-events: none !important;
+    position: absolute !important;
+    left: -9999px !important;
+}
+
+.prestige-button:hover {
+    background: #ffed4a;
+    border-color: #ffd700;
+}
+
+/* Dark theme adjustments */
+body.dark-mode {
+    background-color: #191919;
+    color: white;
+}
+
+body.dark-mode .sidebar {
+    background-color: #2a2a2a;
+    box-shadow: 2px 0 5px rgba(0, 0, 0, 0.3);
+}
+
+body.dark-mode button {
+    background: #3a3a3a;
+    color: #fff;
+    border-color: #4a4a4a;
+}
+
+body.dark-mode button:hover {
+    background: #4a4a4a;
+    border-color: #5a5a5a;
+}
+
+body.dark-mode button:active {
+    background: #5a5a5a;
+    border-color: #6a6a6a;
+}
+
+/* Keep prestige button styling consistent in dark mode */
+body.dark-mode .prestige-button {
+    background: #ffd700;
+    border-color: #ffa500;
+    color: #000;
+}
+
+body.dark-mode .prestige-button:hover {
+    background: #ffed4a;
+    border-color: #ffd700;
+}
+
+.b1 {
     position: fixed; 
-  bottom: 0;       
-  left: 0;         
-  }
-  .b2 {
+    bottom: 0;       
+    left: 0;         
+}
+.b2 {
     position: fixed;
-  bottom: 0;       
-  left: 120px;         
-  }
-  .b3 {
+    bottom: 0;       
+    left: 120px;         
+}
+.b3 {
     position: fixed; 
-  bottom: 0;       
-  left: 240px;         
-  }
+    bottom: 0;       
+    left: 240px;         
+}
 
 
 
