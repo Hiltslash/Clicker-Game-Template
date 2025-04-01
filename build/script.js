@@ -426,6 +426,7 @@ class achievement {
 }
 
 achievements = []
+upgrades = []
 //EDIT THIS:
 document.title = "Coding Clicker! (Hiltslash's Engine)"
 header.innerHTML = "Write some Code! (with the button)"
