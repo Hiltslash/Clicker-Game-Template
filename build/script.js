@@ -430,15 +430,6 @@ upgrades = []
 //EDIT THIS:
 document.title = "Coding Clicker! (Hiltslash's Engine)"
 header.innerHTML = "Write some Code! (with the button)"
-const up1button = new upgradeButton('True Rizz', null, 100, 100, 600, 1);
-upgrades.push(up1button)
-up1button.create()
-
-const up0button = new upgradeButton('Coffee', null, 2, 1, 10, 1);
-upgrades.push(up0button)
-up0button.create()
-
-
 
 
 
