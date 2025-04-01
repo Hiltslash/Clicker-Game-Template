@@ -426,14 +426,15 @@ class achievement {
 }
 
 achievements = []
-upgrades = []
 //EDIT THIS:
 document.title = "Coding Clicker! (Hiltslash's Engine)"
 header.innerHTML = "Write some Code! (with the button)"
 
 
-
 //Create new upgrades with the upgradeButton class. (name, element, cpc, cps, multiplier)
+
+
+
 //For custom upgrades, run the <name>.create() function to initialize. up3button is an example.
 
 
