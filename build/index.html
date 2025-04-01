@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title></title>
+        <link rel="stylesheet" href="style.css">
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <div class="sidebar">
+            <div class="sidebar-buttons">
+                <button class="cd" onclick="clearsave()">Clear Data</button>
+                <button class="tt" onclick="toggletheme()">Toggle Theme</button>
+            </div>
+        </div>
+        <div class="main-content">
+            <h1 id="h">Click Penny!</h1>
+            <img src="img.png" alt="Clickable" class="clickable" id="clickImage">
+            <p class="counter">Clicks: <span id="clickCount">0</span></p>
+            <p id="notif"></p>
+            <p id="stats"></p>  
+            <audio id="bg-music" loop>
+                <source src="track.mp3" type="audio/mp3">
+            </audio>
+            <img src="calculator crashes out.png" alt="Calculator Crashes Out" id="hehe">
+        </div>
+        <script>
+            document.addEventListener("click", function () {
+                document.getElementById("bg-music").play();
+            }, { once: true });
+        </script>
+        <script src="script.js"></script>
+    </body>
+</html>

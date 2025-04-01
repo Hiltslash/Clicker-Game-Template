@@ -221,14 +221,14 @@ class devtools {
     }
 }
 class upgradeButton {
-    constructor(name, element, cpc, cps, cost, multiplier, start) {
+    constructor(name, element, cpc, cps, cost, multiplier) {
         this.name = name
         this.element = element
         this.cpc = cpc
         this.cps = cps
         this.cost = cost
         this.multiplier = multiplier
-        this.start = start
+        this.start = cost
         this.prestige = 0
         this.cpcPrestigeMultiplier = this.cpc ** 2
         this.cpsPrestigeMultiplier = this.cps ** 2
@@ -427,11 +427,14 @@ class achievement {
 
 
 //EDIT THIS:
+//Achievements
 document.title = "Coding Clicker! (Hiltslash's Engine)"
 header.innerHTML = "Write some Code! (with the button)"
 const ach1 = new achievement("Click Marathon", 0, 0, 26400, "Get over 26400 clicks.", 6000, "👟")
 const ach2 = new achievement("Passive Income", 0, 600, 0, "Make 600 a second.", 6000, "💰")
 const ach3 = new achievement("Smash Clicker", 1200, 0, 0, "Make 1200 clicks per click", 6000, "👊")
+
+//Buttons
 const up1button = new upgradeButton("Coffee", document.getElementById("up1b"), 4, 0, 10, 1.2, 10)
 const up2button = new upgradeButton("Clean-up Code", document.getElementById("up2b"), 6, 0, 60, 1.2, 60)
 const up3button = new upgradeButton("AI Code Writer", null, 3, 3, 600, 1.1, 600)
