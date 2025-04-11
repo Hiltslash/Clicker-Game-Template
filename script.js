@@ -5,8 +5,19 @@ const image = document.getElementById("clickImage")
 const statshow = document.getElementById("stats")
 const achnoise = new Audio("ach.mp3")
 const hehe = document.getElementById("hehe")
-const { devtools } = require("./devt")
 hehe.style.display = "none"
+
+// Simple devtools class for fallback
+class DevTools {
+    constructor() {
+        this.isEnabled = false;
+    }
+    
+    toggle() {
+        this.isEnabled = !this.isEnabled;
+        console.log("DevTools " + (this.isEnabled ? "enabled" : "disabled"));
+    }
+}
 
 class upgradeButton {
     constructor(name, element, cpc, cps, cost, multiplier) {
@@ -216,31 +227,81 @@ class achievement {
 
 //EDIT THIS:
 //Achievements
-document.title = "Coding Clicker! (Hiltslash's Engine)"
-header.innerHTML = "Write some Code! (with the button)"
-const ach1 = new achievement("Click Marathon", 0, 0, 26400, "Get over 26400 clicks.", 6000, "👟")
-const ach2 = new achievement("Passive Income", 0, 600, 0, "Make 600 a second.", 6000, "💰")
-const ach3 = new achievement("Smash Clicker", 1200, 0, 0, "Make 1200 clicks per click", 6000, "👊")
+let gameConfig = null;
+let upgrades = [];
+let achievements = [];
 
-//Buttons
-const up1button = new upgradeButton("Coffee", document.getElementById("up1b"), 4, 0, 10, 1.2, 10)
-const up2button = new upgradeButton("Clean-up Code", document.getElementById("up2b"), 6, 0, 60, 1.2, 60)
-const up3button = new upgradeButton("AI Code Writer", null, 3, 3, 600, 1.1, 600)
-const up4button = new upgradeButton("Hack Computers", null, 100, 450, 3000, 1.1, 3000)
-const up5button = new upgradeButton("Late-Night Coding Grind", null, 5000, 300, 56000, 1.35, 56000)
-
-// Create all prestige buttons first
-up1button.create()
-up2button.create()
-up3button.create()  
-up4button.create()
-up5button.create()
-
-upgrades = [up1button, up2button, up3button, up4button, up5button]
-achievements = [ach1, ach2, ach3]
-//Create new upgrades with the upgradeButton class. (name, element, cpc, cps, multiplier)
-//For custom upgrades, run the <name>.create() function to initialize. up3button is an example.
-
+async function loadGameConfig() {
+    try {
+        const response = await fetch('game_config.json');
+        gameConfig = await response.json();
+        
+        if (gameConfig.useJSON) {
+            document.title = gameConfig.gameTitle;
+            header.innerHTML = gameConfig.headerText;
+            
+            // Initialize stats
+            clicks = gameConfig.initialStats.clicks;
+            cpc = gameConfig.initialStats.cpc;
+            cps = gameConfig.initialStats.cps;
+            
+            // Create upgrades from config
+            upgrades = gameConfig.upgrades.map(upgrade => {
+                const button = new upgradeButton(
+                    upgrade.name,
+                    null,
+                    upgrade.cpc,
+                    upgrade.cps,
+                    upgrade.cost,
+                    upgrade.multiplier
+                );
+                if (upgrade.prestigeMultiplier) {
+                    button.prestigeMultiplier = upgrade.prestigeMultiplier;
+                }
+                return button;
+            });
+            
+            // Create achievements from config
+            achievements = gameConfig.achievements.map(ach => 
+                new achievement(
+                    ach.name,
+                    ach.cpcr,
+                    ach.cpsr,
+                    ach.clickreq,
+                    ach.description,
+                    ach.reward,
+                    ach.emoji
+                )
+            );
+            
+            // Create all prestige buttons
+            upgrades.forEach(upgrade => upgrade.create());
+        }
+    } catch (error) {
+        console.error("Error loading game config:", error);
+    }
+    
+    // If useJSON is false or there was an error, use hardcoded values
+    if (!gameConfig || !gameConfig.useJSON) {
+        document.title = "Coding Clicker! (Hiltslash's Engine)";
+        header.innerHTML = "Write some Code! (with the button)";
+        
+        const ach1 = new achievement("Click Marathon", 0, 0, 26400, "Get over 26400 clicks.", 6000, "👟");
+        const ach2 = new achievement("Passive Income", 0, 600, 0, "Make 600 a second.", 6000, "💰");
+        const ach3 = new achievement("Smash Clicker", 1200, 0, 0, "Make 1200 clicks per click", 6000, "👊");
+        
+        const up1button = new upgradeButton("Coffee", document.getElementById("up1b"), 4, 0, 10, 1.2, 10);
+        const up2button = new upgradeButton("Clean-up Code", document.getElementById("up2b"), 6, 0, 60, 1.2, 60);
+        const up3button = new upgradeButton("AI Code Writer", null, 3, 3, 600, 1.1, 600);
+        const up4button = new upgradeButton("Hack Computers", null, 100, 450, 3000, 1.1, 3000);
+        const up5button = new upgradeButton("Late-Night Coding Grind", null, 5000, 300, 56000, 1.35, 56000);
+        
+        upgrades = [up1button, up2button, up3button, up4button, up5button];
+        achievements = [ach1, ach2, ach3];
+        
+        upgrades.forEach(upgrade => upgrade.create());
+    }
+}
 
 var clicks = 0;
 var cpc = 1;
@@ -507,6 +568,8 @@ function toggletheme() {
 }
 
 // Initialize game
-const debug = new devtools()
-load();
-addClicksPerSecond();
+const debug = new DevTools();
+loadGameConfig().then(() => {
+    load();
+    addClicksPerSecond();
+});

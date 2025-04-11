@@ -1,0 +1,84 @@
+{
+    "useJSON": true,
+    "gameTitle": "Coding Clicker! (Hiltslash's Engine)",
+    "headerText": "Write some Code! (with the button)",
+    "initialStats": {
+        "clicks": 0,
+        "cpc": 1,
+        "cps": 0
+    },
+    "upgrades": [
+        {
+            "name": "test",
+            "cpc": 4,
+            "cps": 0,
+            "cost": 10,
+            "multiplier": 1.2
+        },
+        {
+            "name": "Clean-up Code",
+            "cpc": 6,
+            "cps": 0,
+            "cost": 60,
+            "multiplier": 1.2
+        },
+        {
+            "name": "AI Code Writer",
+            "cpc": 3,
+            "cps": 3,
+            "cost": 600,
+            "multiplier": 1.1
+        },
+        {
+            "name": "Hack Computers",
+            "cpc": 100,
+            "cps": 450,
+            "cost": 3000,
+            "multiplier": 1.1
+        },
+        {
+            "name": "Late-Night Coding Grind",
+            "cpc": 5000,
+            "cps": 300,
+            "cost": 56000,
+            "multiplier": 1.35,
+            "prestigeMultiplier": 1000
+        },
+        {
+            "name": "Hyperfocus Juice",
+            "cpc": 60000,
+            "cps": 60500,
+            "cost": 1000000,
+            "multiplier": 1.4
+        }
+    ],
+    "achievements": [
+        {
+            "name": "Click Marathon",
+            "cpcr": 0,
+            "cpsr": 0,
+            "clickreq": 26400,
+            "description": "Get over 26400 clicks.",
+            "reward": 6000,
+            "emoji": "👟"
+        },
+        {
+            "name": "Passive Income",
+            "cpcr": 0,
+            "cpsr": 600,
+            "clickreq": 0,
+            "description": "Make 600 a second.",
+            "reward": 6000,
+            "emoji": "💰"
+        },
+        {
+            "name": "Smash Clicker",
+            "cpcr": 1200,
+            "cpsr": 0,
+            "clickreq": 0,
+            "description": "Make 1200 clicks per click",
+            "reward": 6000,
+            "emoji": "��"
+        }
+    ]
+} 
