@@ -1,5 +1,4 @@
 import tkinter as tk
-import os
 import sys
 root = tk.Tk()
 root.title("Clicker Game Maker")
@@ -51,7 +50,6 @@ def buildNewAch():
         c.config(text="New Ach: Reward")
     elif bstep == 7:
         reward = input_value
-        print("ASDHHAISDHA")
         c.config(text="Complete")
     elif bstep == 8:
         output = f"const ach{len(achievements)} = new achievement('{aname}', {cpcr}, {cpsr}, {clickr}, '{description}', {multiplier}, {reward}, '{emoji}');"

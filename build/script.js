@@ -3,7 +3,6 @@ const p = document.getElementById("notif")
 const header = document.getElementById("h")
 const image = document.getElementById("clickImage")
 const statshow = document.getElementById("stats")
-const achnoise = new Audio("ach.mp3")
 const hehe = document.getElementById("hehe")
 hehe.style.display = "none"
 class devtools {
@@ -425,8 +424,6 @@ class achievement {
     }
 }
 
-achievements = []
-upgrades = []
 //EDIT THIS:
 document.title = "Coding Clicker! (Hiltslash's Engine)"
 header.innerHTML = "Write some Code! (with the button)"
